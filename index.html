@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilişim Teknolojileri Öğrenme Platformu</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Fredoka One', cursive;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #43e97b 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 
+                        0 0 0 10px rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            animation: floatIn 0.8s ease-out;
+        }
+
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #43e97b 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.5em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu {
+            padding: 60px;
+        }
+
+        .menu h2 {
+            text-align: center;
+            color: #2d3436;
+            margin-bottom: 50px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+        }
+
+        .class-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .class-btn {
+            padding: 50px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.5em;
+            font-weight: bold;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            color: white;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .class-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .class-btn:hover::before {
+            left: 100%;
+        }
+
+        .class-btn .icon {
+            font-size: 5em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .class-btn:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .class-btn:active {
+            transform: translateY(-8px) scale(0.98);
+        }
+
+        .class-btn.sinif5 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .class-btn.sinif6 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .class-info {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .class-info h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .class-info p {
+            color: #555;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header p {
+                font-size: 1.2em;
+            }
+            
+            .class-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Bilişim Teknolojileri Öğrenme Platformu</h1>
+            <p>Hangi sınıfta öğrenmek istersin?</p>
+        </div>
+
+        <div class="menu">
+            <h2>🎯 Sınıf Seç</h2>
+            <div class="class-buttons">
+                <button class="class-btn sinif5" onclick="goToClass('5-sinif')">
+                    <span class="icon">🎒</span>
+                    <span class="text">5. Sınıf</span>
+                </button>
+                <button class="class-btn sinif6" onclick="goToClass('6-sinif')">
+                    <span class="icon">🎓</span>
+                    <span class="text">6. Sınıf</span>
+                </button>
+            </div>
+            
+            <div class="class-info">
+                <h3>📚 Öğrenme İçerikleri</h3>
+                <p>Her sınıf için özel olarak hazırlanmış oyunlar, quizler ve öğrenme materyalleri ile bilişim teknolojilerini eğlenceli bir şekilde öğrenin!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 3D Arka Plan Animasyonu
+        let scene, camera, renderer, particles;
+
+        function init3DBackground() {
+            const container = document.getElementById('canvas-container');
+            
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+            
+            // Renkli küreler oluştur
+            const geometry = new THREE.SphereGeometry(0.6, 32, 32);
+            const colors = [0xff6b6b, 0xfeca57, 0x48dbfb, 0x4facfe, 0x43e97b, 0xf093fb];
+            
+            particles = [];
+            for (let i = 0; i < 70; i++) {
+                const material = new THREE.MeshBasicMaterial({ 
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    transparent: true,
+                    opacity: 0.7
+                });
+                const sphere = new THREE.Mesh(geometry, material);
+                
+                sphere.position.x = (Math.random() - 0.5) * 25;
+                sphere.position.y = (Math.random() - 0.5) * 25;
+                sphere.position.z = (Math.random() - 0.5) * 12 - 6;
+                
+                sphere.scale.setScalar(Math.random() * 2.5 + 0.5);
+                
+                sphere.userData = {
+                    velocity: new THREE.Vector3(
+                        (Math.random() - 0.5) * 0.025,
+                        (Math.random() - 0.5) * 0.025,
+                        (Math.random() - 0.5) * 0.015
+                    ),
+                    rotationSpeed: new THREE.Vector3(
+                        Math.random() * 0.025,
+                        Math.random() * 0.025,
+                        Math.random() * 0.025
+                    )
+                };
+                
+                scene.add(sphere);
+                particles.push(sphere);
+            }
+            
+            camera.position.z = 6;
+            
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            particles.forEach(particle => {
+                particle.position.add(particle.userData.velocity);
+                particle.rotation.x += particle.userData.rotationSpeed.x;
+                particle.rotation.y += particle.userData.rotationSpeed.y;
+                particle.rotation.z += particle.userData.rotationSpeed.z;
+                
+                // Sınırları kontrol et
+                if (Math.abs(particle.position.x) > 12) particle.userData.velocity.x *= -1;
+                if (Math.abs(particle.position.y) > 12) particle.userData.velocity.y *= -1;
+                if (Math.abs(particle.position.z) > 6) particle.userData.velocity.z *= -1;
+            });
+            
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Sayfa yüklendiğinde 3D arka planı başlat
+        window.addEventListener('load', init3DBackground);
+
+        // Sınıf seçimi
+        function goToClass(className) {
+            window.location.href = className + '/index.html';
+        }
+    </script>
+</body>
+</html>

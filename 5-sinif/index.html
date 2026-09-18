@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Sınıf Bilişim Macerası</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div id="emoji-container"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>💻 5. Sınıf Bilişim Macerası</h1>
+            <p>Bilgisayarlarla tanışalım! 🎮</p>
+        </div>
+
+        <div id="menu" class="menu">
+            <h2>🎯 Hangi Oyunu Oynayalım?</h2>
+            <div class="subject-buttons">
+                <button class="subject-btn quiz" onclick="startGame('quiz')">
+                    <span class="icon">🌟</span>
+                    <span class="text">Soru Cevap</span>
+                </button>
+                <button class="subject-btn matching" onclick="startGame('matching')">
+                    <span class="icon">🎨</span>
+                    <span class="text">Eşleştirme</span>
+                </button>
+                <button class="subject-btn sorting" onclick="startGame('sorting')">
+                    <span class="icon">🎪</span>
+                    <span class="text">Sıralama</span>
+                </button>
+            </div>
+            
+            <h2 class="learning-title">📚 Konuları Öğrenelim</h2>
+            <div class="subject-buttons learning-buttons">
+                <button class="subject-btn learning" onclick="showLearningArea('bilişim')">
+                    <span class="icon">💻</span>
+                    <span class="text">Bilişim Teknolojileri</span>
+                </button>
+                <button class="subject-btn learning" onclick="showLearningArea('donanım')">
+                    <span class="icon">🖥️</span>
+                    <span class="text">Bilgisayar Donanımı</span>
+                </button>
+                <button class="subject-btn learning" onclick="showLearningArea('güvenlik')">
+                    <span class="icon">🔒</span>
+                    <span class="text">Güvenlik ve Etik</span>
+                </button>
+                <button class="subject-btn learning" onclick="showLearningArea('yapayzeka')">
+                    <span class="icon">🤖</span>
+                    <span class="text">Yapay Zekâ</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="game" class="game hidden">
+            <div class="game-header">
+                <div class="score-board">
+                    <span class="score">⭐ Puan: <span id="score">0</span></span>
+                    <span class="question-num" id="game-info">Soru: 1/10</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progress" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Quiz Game Section -->
+            <div id="quiz-section" class="game-section hidden">
+                <div class="question-container">
+                    <h2 id="question"></h2>
+                    <div id="options" class="options"></div>
+                </div>
+                <div id="feedback" class="feedback hidden"></div>
+            </div>
+
+            <!-- Matching Game Section -->
+            <div id="matching-section" class="game-section hidden">
+                <div class="matching-container">
+                    <h2 id="matching-instruction">Resimleri doğru isimleriyle eşleştir!</h2>
+                    <div class="matching-pairs">
+                        <div id="terms-column" class="matching-column"></div>
+                        <div id="definitions-column" class="matching-column"></div>
+                    </div>
+                </div>
+                <div id="matching-feedback" class="feedback hidden"></div>
+            </div>
+
+            <!-- Sorting Game Section -->
+            <div id="sorting-section" class="game-section hidden">
+                <div class="sorting-container">
+                    <h2 id="sorting-instruction">Adımları doğru sırada sıralayalım!</h2>
+                    <div id="sorting-items" class="sorting-items"></div>
+                    <div class="sorted-area">
+                        <h3>Sıralı Alan:</h3>
+                        <div id="sorted-items" class="sorted-items"></div>
+                    </div>
+                </div>
+                <div id="sorting-feedback" class="feedback hidden"></div>
+            </div>
+        </div>
+
+        <div id="result" class="result hidden">
+            <div class="result-content">
+                <h2 id="result-title">🎉 Tebrikler!</h2>
+                <p id="result-message"></p>
+                <div class="final-score">
+                    <span>Final Puanı: </span>
+                    <span id="final-score">0</span>
+                </div>
+                <button class="restart-btn" onclick="goToMenu()">Ana Menüye Dön</button>
+            </div>
+        </div>
+
+        <div id="learning" class="learning hidden">
+            <div class="learning-content">
+                <h2 id="learning-title">📚 Konu Anlatımı</h2>
+                <div id="learning-text" class="learning-text"></div>
+                <button class="restart-btn" onclick="goToMenu()">Ana Menüye Dön</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
