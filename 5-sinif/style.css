@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 
 body {
@@ -611,7 +613,7 @@ body {
 
 @media (max-width: 768px) {
     .header h1 {
-        font-size: 2em;
+        font-size: 1.8em;
     }
     
     .header p {
@@ -620,21 +622,152 @@ body {
     
     .subject-buttons {
         grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .subject-btn {
+        padding: 30px 20px;
+        font-size: 1.1em;
+    }
+    
+    .subject-btn .icon {
+        font-size: 3em;
+    }
+    
+    .learning-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .game {
+        padding: 20px;
+    }
+    
+    .game-header {
+        margin-bottom: 20px;
+    }
+    
+    .score-board {
+        font-size: 1em;
+        padding: 10px 15px;
     }
     
     .options {
         grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .option-btn {
+        padding: 18px;
+        font-size: 1em;
     }
     
     .question-container h2 {
-        font-size: 1.5em;
+        font-size: 1.4em;
+        padding: 15px;
     }
     
     .matching-pairs {
         flex-direction: column;
+        gap: 15px;
+    }
+    
+    .matching-item {
+        padding: 18px;
+        font-size: 1em;
+        min-height: 70px;
+    }
+    
+    .sorting-items {
+        padding: 15px;
+        gap: 12px;
+    }
+    
+    .sorting-item {
+        padding: 15px 20px;
+        font-size: 1em;
+    }
+    
+    .sorted-items {
+        padding: 15px;
     }
     
     .container {
         margin: 10px;
+        border-radius: 20px;
+    }
+    
+    .learning-text {
+        font-size: 1.1em;
+        padding: 20px;
+    }
+    
+    .learning-text h3 {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 30px 20px;
+    }
+    
+    .header h1 {
+        font-size: 1.5em;
+    }
+    
+    .header p {
+        font-size: 1em;
+    }
+    
+    .menu {
+        padding: 30px 20px;
+    }
+    
+    .menu h2 {
+        font-size: 1.5em;
+        margin-bottom: 25px;
+    }
+    
+    .subject-btn {
+        padding: 25px 15px;
+        font-size: 1em;
+    }
+    
+    .subject-btn .icon {
+        font-size: 2.5em;
+    }
+    
+    .learning-title {
+        font-size: 1.5em;
+        margin: 30px 0 20px 0;
+    }
+    
+    .result {
+        padding: 30px 20px;
+    }
+    
+    .result h2 {
+        font-size: 2em;
+    }
+    
+    .result p {
+        font-size: 1.1em;
+    }
+    
+    .final-score {
+        font-size: 1.8em;
+    }
+    
+    .restart-btn {
+        padding: 15px 30px;
+        font-size: 1.1em;
+    }
+    
+    .learning {
+        padding: 30px 20px;
+    }
+    
+    .learning h2 {
+        font-size: 2em;
     }
 }

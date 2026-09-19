@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Bilişim Teknolojileri Öğrenme Platformu</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
@@ -11,6 +11,8 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
         }
 
         body {
@@ -206,10 +208,80 @@
             
             .class-buttons {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .class-btn {
+                padding: 40px 25px;
+                font-size: 1.3em;
+            }
+            
+            .class-btn .icon {
+                font-size: 4em;
+            }
+            
+            .class-info {
+                margin-top: 30px;
+                padding: 20px;
+            }
+            
+            .class-info h3 {
+                font-size: 1.5em;
+            }
+            
+            .class-info p {
+                font-size: 1.1em;
             }
             
             .container {
                 margin: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 35px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header p {
+                font-size: 1.1em;
+            }
+            
+            .menu {
+                padding: 40px 20px;
+            }
+            
+            .menu h2 {
+                font-size: 1.8em;
+                margin-bottom: 35px;
+            }
+            
+            .class-btn {
+                padding: 35px 20px;
+                font-size: 1.2em;
+            }
+            
+            .class-btn .icon {
+                font-size: 3.5em;
+            }
+            
+            .class-info {
+                margin-top: 25px;
+                padding: 15px;
+            }
+            
+            .class-info h3 {
+                font-size: 1.3em;
+                margin-bottom: 10px;
+            }
+            
+            .class-info p {
+                font-size: 1em;
+                line-height: 1.5;
             }
         }
     </style>
