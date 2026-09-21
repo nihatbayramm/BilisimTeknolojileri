@@ -1,3 +1,6 @@
+
+link : https://nihatbayramm.github.io/BilisimTeknolojileri/
+
 # 💻 Bilişim Teknolojileri Öğrenme Platformu
 
 5. ve 6. sınıf bilişim teknolojileri dersi için profesyonel ve eğlenceli öğrenme platformu.
